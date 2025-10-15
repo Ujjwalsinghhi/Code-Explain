@@ -5,8 +5,11 @@ export async function explain(prevState, formData) {
   const language = formData.get("language");
   console.log(`Generating explanation for ${language}`);
 
+  // Use environment variable instead of hardcoded URL
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
   try {
-    const res = await fetch(`http://localhost:3002/api/explain-code`, {
+    const res = await fetch(`${apiUrl}/explain-code`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ code, language }),
